@@ -10,22 +10,21 @@
 {% block body %}
 
 
-<h1 class="container text-center">Inscription</h1>
-
-   <div class="margin-auto">
+   <div class="margin-auto m-5  d-flex align-items-center flex-column" style="border-radius: 60px;
+background: linear-gradient(145deg, #b0cbe6, #d2f1ff);
+box-shadow:  8px 8px 16px #8599ad,
+             -8px -8px 16px #ffffff;">
+       <h1 class="container text-center mb-3">Inscription</h1>
        {{ form_start(form) }}
 
 
-       {{ form_row(form.username,{'label':'Login','attr':{'placeholder':'Login'}}) }}
-       {{ form_row(form.email,{'label':'Email','attr':{'placeholder':'Adress email'}}) }}
-       {{ form_row(form.password,{'label':'Mot de passe ','attr':{'placeholder':'Mot de passe'}}) }}
-       {{ form_row(form.confirm_password,{'label':'Confirme mot de passe','attr':{'placeholder':'Confirme mot de passe'}}) }}
-
-
-       <button type="submit" class="btn btn-outline-primary">Inscription</button>
+       {{ form_row(form.username,{'attr':{'placeholder':'Login'}}) }}
+       {{ form_row(form.email,{'attr':{'placeholder':'Adress email'}}) }}
+       {{ form_row(form.password,{'attr':{'placeholder':'Mot de passe'}}) }}
+       {{ form_row(form.confirm_password,{'attr':{'placeholder':'Confirme mot de passe'}}) }}
+       <div class="d-flex justify-content-center">
+           <button type="submit" class="btn btn-outline-primary m-2" >Inscription</button>
+       </div>
        {{ form_end(form) }}
-   </div>
-
-
    </div>
 {% endblock %}

@@ -87,7 +87,8 @@ class IndexController extends AbstractController
         if ($form->isSubmitted()&& $form->isValid())
         {
             $Coment->setCreatedAt(new \DateTime())
-                    ->setAuthor($user);
+                    ->setAuthor($user)
+                    ->setTitre('commentaire');
             $manager->persist($Coment);
             $manager->flush();
 
