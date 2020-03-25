@@ -1,0 +1,56 @@
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% extends 'base.html.twig' %}
+
+{% block title %}TCHAT!{% endblock %}
+
+{% block body %}
+    <div class="row">
+        {% include "index/basetchat.html.twig" %}
+        <div class="card col-md-10" >
+            <div class="card-body">
+                <div class="example-wrapper ">
+                    {% for pagination in pagination %}
+                        <div class="alert alert-dismissible alert-info">
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <form method="post" onsubmit="return confirm('Etes vous sur de vouloir suprimer?')" action="{{ path('comment.delete',{id: pagination.id}) }}" >
+                                    <input  type="hidden" name="_method" value="DELETECOMMENT">
+                                    <button type="submit" class="close">&times;</button>
+                                </form>
+                            {% endif %}
+                            <h4 class="alert-heading text-center">{{ pagination.Author.username }}</h4>
+                            <p>Ecrit le : {{ pagination.createdAt |date("m/d/Y") }}</p>
+                            <p class="mb-0">commentaire :
+                                {{ pagination.Description }}</p>
+                        </div>
+                    {% endfor %}
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+
+                            {{ knp_pagination_render(pagination) }}
+                        </ul>
+                    </nav>
+                    <form method="post">
+                        {% if app.user  %}
+                            <div class="container">
+                                {{ form_start(form) }}
+                                {{ form_row(form.Description,{'attr':{'placeholder': "votre commentaire"}}) }}
+                                <div class="btn-bloc">
+                                    <button type="submit" class="btn btn-primary">Publier</button>
+                                </div>
+                                {{ form_end(form) }}
+                            </div>
+
+                        {% else %}
+                            <h2>Vous ne pouvez pas commentez car il faut vous connecter</h2>
+
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+            </div>
+        </div>
+
+{% endblock %}
+{% block javascripts %}
+    {#{{ encore_entry_script_tags(' tchat') }}#}
+{% endblock %}

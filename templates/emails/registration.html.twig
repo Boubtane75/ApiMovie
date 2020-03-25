@@ -1,0 +1,9 @@
+{% apply inline_css(source('@styles/emails.css')) %}
+    <div class="card" style="border-radius: 83px;background: linear-gradient(145deg, #e6e6e6, #ffffff);box-shadow:  5px 5px 10px #a1a1a1,-5px -5px 10px #ffffff;width: 50% ">
+        <img src="{{ email.image('@images/emails/index.png') }}" style="width: 15%; height: 15%" class="card-img-top" alt="...">
+        <div class="card-body w-100" >
+            <h5 class="card-title text-center">Bienvenue sur ApiMovie <strong class="text-success">{{ username }}</strong></h5>
+            <p class="card-text">Pour pouvoir valider votre compte</p><a href="{{ url('security_login') }}" class="btn btn-outline-success ">cliquer</a>
+        </div>
+    </div>
+{% endapply %}

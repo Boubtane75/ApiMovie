@@ -1,0 +1,15 @@
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Profile!{% endblock %}
+
+{% block body %}
+    <h1 class="container">Crée un Utilisateur</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit" class="btn btn-warning">Enregistrer</button>
+    {{ form_end(form) }}
+
+{% endblock %}

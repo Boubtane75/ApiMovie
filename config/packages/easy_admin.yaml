@@ -1,0 +1,65 @@
+easy_admin:
+    list:
+        actions:
+            - { name: 'edit', icon: 'pencil', label: false }
+            - { name: 'new', icon: 'plus', label: false }
+            - { name: 'delete', icon: 'trash can', label: false}
+        max_results: 5
+        batch_actions: ['delete']
+    design:
+        menu:
+            - {label: "Notification"}
+            - {entity: Message,icon: "th-list"}
+            - {label: "Commentaire Admin"}
+            - {entity: Coment,icon: "th-list", label: 'Commantaire tchat'}
+#            - {entity: Message , icon: "th-list"}
+#            - {entity: Coment, icon: th-list}
+            - {label: "Réglage"}
+            - {entity: Utilisateur,icon: "user" , permission: 'ROLE_ADMIN'}
+
+    site_name: 'Administration/ Api movie'
+    user:
+        display_name: true
+        display_avatar: true
+        name_property_path: 'Username'
+
+    entities:
+        Message:
+            class: App\Entity\Message
+            list:
+                fields: ['Title' , 'content']
+            form:
+                controller: App\Controller\admin\MessageController
+                title: 'Message'
+                fields:
+                    - {property: 'Title',  label: 'Titre'}
+                    - {property: 'content',  label: 'Contenu'}
+                actions:
+                    - { name: 'new', label: 'envoyer' }
+        Coment:
+            class: App\Entity\Coment
+            list:
+                title:  'Créer un commentaire '
+                fields: ['author' , 'titre' ,'Description','CreatedAt']
+            form:
+                title:  'Créer un commentaire '
+                fields:
+                    - titre
+                    - Description
+                    - CreatedAt
+                    - { type: 'section', label: "l'auteur du commentaire", icon: 'user'}
+                    - {property: 'author',  label: 'Auteur'}
+        Utilisateur:
+            class: App\Entity\Utilisateur
+            list:
+                fields: ['username', 'email' ,'roles']
+                filters: [{ property: 'roles'}]
+                item_permission: ['ROLE_SUPER_ADMIN']
+            form:  # <-- 'form' is applied to both 'new' and 'edit' views
+                title:  'Nouvelle %%entity_label%%'
+                fields:
+                    - { type: 'group', columns: 8, label: 'information '}
+                    - { property: 'username',  label: 'Nom'}
+                    - { property: 'email', type: 'email', label: 'Email'}
+                    - { property: 'password', type: 'password', label: 'Mot de passe'}
+                    - { type: 'group', label: "Role de l'utilisateur", icon: 'user', columns: 4 }

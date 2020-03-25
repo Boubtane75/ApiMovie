@@ -1,0 +1,33 @@
+
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/login.css') }}">
+{% endblock %}
+
+{% block title %}Hello SecurityController!{% endblock %}
+
+{% block body %}
+    <div class="containerFormulaire">
+    <div class="box">
+        <h1 class="container text-center">Connexion</h1>
+        {% if error %}
+    <div class="alert alert-danger">{{ error.messageKey | trans(error.messagedata,'security') }}</div>
+    {% endif %}
+
+        <form class="formulaire" action="{{ path('security_login') }}" method="post">
+            <div class="form-group">
+                <input type="text" placeholder="Adresse email" required name="_username" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="password" placeholder="Mot de passe" required name="_password" class="form-control">
+            </div>
+            <div class="form-group">
+                <p>Si vous n'avez pas de compte <a href="{{ path('security_registration') }}">cliquez ici</a></p>
+            </div>
+            <div class="form-group  justify-content-center">
+                <button type="submit" class="btn btn-success">connexion</button>
+            </div>
+        </form>
+        </div>
+    </div>
+{% endblock %}
